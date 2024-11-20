@@ -34,10 +34,10 @@ fn view(app: &App, model: &Model, frame: Frame) {
     let part_size = (model.circle_radius * 2.0) / 11.0;  // divide diameter by 11
     let second_radius = part_size * 7.0;  // take 7 parts
     
-    // Draw first circle (smaller)
+    // Draw first circle (larger)
     draw.ellipse()
         .xy(center)
-        .radius(second_radius)
+        .radius(model.circle_radius)
         .no_fill()
         .stroke(BLACK)
         .stroke_weight(2.0);
@@ -54,8 +54,8 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .stroke(BLACK)
         .stroke_weight(2.0);
     
-    // Draw horizontal diameter D across smaller circle
-    let diameter_start = pt2(-model.circle_radius, 0.0);
+    // Draw horizontal diameter D across first (larger) circle
+    let diameter_start = pt2(-model.circle_radius, 0.0);  // Using model.circle_radius (200.0) for the larger circle
     let diameter_end = pt2(model.circle_radius, 0.0);
     draw.line()
         .start(diameter_start)
@@ -63,16 +63,16 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .color(BLACK)
         .stroke_weight(2.0);
 
-    // Draw second circle (largest)
+    // Draw second circle (smaller)
     draw.ellipse()
         .xy(center)
-        .radius(model.circle_radius)
+        .radius(second_radius)
         .no_fill()
         .stroke(BLACK)
         .stroke_weight(2.0);
     
-    // Draw point T at top of largest circle
-    let point_t = pt2(0.0, model.circle_radius);
+    // Draw point T at top of second (smaller) circle
+    let point_t = pt2(0.0, second_radius);  // Keeping T at top of smaller circle
     draw.ellipse()
         .xy(point_t)
         .radius(3.0)
