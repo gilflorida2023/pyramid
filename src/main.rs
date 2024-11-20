@@ -91,6 +91,34 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .stroke(BLACK)
         .stroke_weight(2.0);
 
+    // Draw square tangent to circle t
+    let square_t_size = new_circle_radius * 2.0;  // Square side length = diameter of circle t
+    draw.rect()
+        .xy(point_t)  // Centered at same point as circle t
+        .w_h(square_t_size, square_t_size)
+        .no_fill()
+        .stroke(BLACK)
+        .stroke_weight(2.0);
+
+    // Calculate and draw lines connecting top corners of squares s and t
+    let s_top_left = pt2(-square_size/2.0, square_size/2.0);
+    let s_top_right = pt2(square_size/2.0, square_size/2.0);
+    let t_top_left = pt2(-square_t_size/2.0, point_t.y + square_t_size/2.0);
+    let t_top_right = pt2(square_t_size/2.0, point_t.y + square_t_size/2.0);
+
+    // Draw connecting lines between squares
+    draw.line()
+        .start(s_top_left)
+        .end(t_top_left)
+        .color(BLACK)
+        .stroke_weight(2.0);
+
+    draw.line()
+        .start(s_top_right)
+        .end(t_top_right)
+        .color(BLACK)
+        .stroke_weight(2.0);
+
     // Draw lines from T to ends of diameter D
     draw.line()
         .start(point_t)
