@@ -78,6 +78,19 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .radius(3.0)
         .color(BLACK);
 
+    // Calculate radius of circle t (centered at point T)
+    // Distance from T to top edge of square s
+    let square_top_edge = square_size / 2.0;  // y-coordinate of square's top edge
+    let new_circle_radius = square_top_edge - second_radius;  // distance from T to square's top edge
+
+    // Draw circle t
+    draw.ellipse()
+        .xy(point_t)
+        .radius(new_circle_radius)
+        .no_fill()
+        .stroke(BLACK)
+        .stroke_weight(2.0);
+
     // Draw lines from T to ends of diameter D
     draw.line()
         .start(point_t)
