@@ -53,7 +53,13 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .no_fill()
         .stroke(BLACK)
         .stroke_weight(2.0);
-    
+
+    // Points of square s (not drawn, used for line references)
+    // Point A (top left): (-200.0, 200.0)
+    // Point B (top right): (200.0, 200.0)
+    // Point C (bottom right): (200.0, -200.0)
+    // Point D (bottom left): (-200.0, -200.0)
+
     // Draw diameter line D across circle L
     let diameter_start = pt2(-model.circle_radius, 0.0);
     let diameter_end = pt2(model.circle_radius, 0.0);
@@ -100,24 +106,25 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .stroke(BLACK)
         .stroke_weight(2.0);
 
-    // Calculate and draw lines connecting top corners of squares s and t
-    let s_top_left = pt2(-square_size/2.0, square_size/2.0);
-    let s_top_right = pt2(square_size/2.0, square_size/2.0);
-    let t_top_left = pt2(-square_t_size/2.0, point_t.y + square_t_size/2.0);
-    let t_top_right = pt2(square_t_size/2.0, point_t.y + square_t_size/2.0);
+    // Points of square t (not drawn, used for line references)
+    // Point E (top left): (-square_t_size/2.0, second_radius + square_t_size/2.0)
+    // Point F (top right): (square_t_size/2.0, second_radius + square_t_size/2.0)
+    // Point G (bottom right): (square_t_size/2.0, second_radius - square_t_size/2.0)
+    // Point H (bottom left): (-square_t_size/2.0, second_radius - square_t_size/2.0)
 
-    // Draw connecting lines between squares
+    // Draw line AG (from top-left of s to bottom-right of t)
     draw.line()
-        .start(s_top_left)
-        .end(t_top_left)
+        .start(pt2(-200.0, 200.0))  // Point A
+        .end(pt2(square_t_size/2.0, second_radius - square_t_size/2.0))  // Point G
         .color(BLACK)
-        .stroke_weight(2.0);
+        .stroke_weight(4.0);
 
+    // Draw line BH (from top-right of s to bottom-left of t)
     draw.line()
-        .start(s_top_right)
-        .end(t_top_right)
+        .start(pt2(200.0, 200.0))  // Point B
+        .end(pt2(-square_t_size/2.0, second_radius - square_t_size/2.0))  // Point H
         .color(BLACK)
-        .stroke_weight(2.0);
+        .stroke_weight(4.0);
 
     // Draw lines from T to ends of diameter D
     draw.line()
