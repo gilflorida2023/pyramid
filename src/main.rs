@@ -16,7 +16,7 @@ fn model(app: &App) -> Model {
         .unwrap();
     
     Model {
-        circle_radius: 200.0,  // Radius of the first circle
+        circle_radius: 200.0,  // Radius of circle L
     }
 }
 
@@ -29,12 +29,12 @@ fn view(app: &App, model: &Model, frame: Frame) {
     
     let center = pt2(0.0, 0.0);
     
-    // Calculate second circle radius based on original circle's diameter divided into 11 parts
+    // Calculate circle c's radius based on circle L's diameter divided into 11 parts
     // and taking 7 parts of that
     let part_size = (model.circle_radius * 2.0) / 11.0;  // divide diameter by 11
     let second_radius = part_size * 7.0;  // take 7 parts
     
-    // Draw first circle (larger)
+    // Draw circle L (larger circle)
     draw.ellipse()
         .xy(center)
         .radius(model.circle_radius)
@@ -42,11 +42,11 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .stroke(BLACK)
         .stroke_weight(2.0);
     
-    // Calculate square size for circle to be inscribed
+    // Calculate square s size to be tangent to circle L
     // For a circle inscribed in a square, square side = diameter = 2 * radius
     let square_size = model.circle_radius * 2.0;
     
-    // Draw square with circle inscribed
+    // Draw square s
     draw.rect()
         .xy(center)
         .w_h(square_size, square_size)
@@ -54,8 +54,8 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .stroke(BLACK)
         .stroke_weight(2.0);
     
-    // Draw horizontal diameter D across first (larger) circle
-    let diameter_start = pt2(-model.circle_radius, 0.0);  // Using model.circle_radius (200.0) for the larger circle
+    // Draw diameter line D across circle L
+    let diameter_start = pt2(-model.circle_radius, 0.0);
     let diameter_end = pt2(model.circle_radius, 0.0);
     draw.line()
         .start(diameter_start)
@@ -63,7 +63,7 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .color(BLACK)
         .stroke_weight(2.0);
 
-    // Draw second circle (smaller)
+    // Draw circle c (smaller circle)
     draw.ellipse()
         .xy(center)
         .radius(second_radius)
@@ -71,8 +71,8 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .stroke(BLACK)
         .stroke_weight(2.0);
     
-    // Draw point T at top of second (smaller) circle
-    let point_t = pt2(0.0, second_radius);  // Keeping T at top of smaller circle
+    // Draw point T at top of circle c
+    let point_t = pt2(0.0, second_radius);
     draw.ellipse()
         .xy(point_t)
         .radius(3.0)
