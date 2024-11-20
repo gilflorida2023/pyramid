@@ -30,7 +30,24 @@ This application creates a geometric composition consisting of two concentric ci
    - Style: Black outline, no fill
    - Stroke Weight: 2.0 pixels
 
-4. **Center Point**
+4. **Point T**
+   - Position: (0, 200) - top tangent point of largest circle
+   - Radius: 3.0 pixels
+   - Style: Solid black fill
+
+5. **Diameter Line D**
+   - Horizontal line spanning smallest circle
+   - Start point: (-127.27, 0)
+   - End point: (127.27, 0)
+   - Style: Black line
+   - Stroke Weight: 2.0 pixels
+
+6. **Lines from T to D**
+   - Two lines connecting point T to each end of diameter D
+   - Style: Black lines
+   - Stroke Weight: 2.0 pixels
+
+7. **Center Point**
    - Position: (0,0)
    - Radius: 3.0 pixels
    - Style: Solid black fill

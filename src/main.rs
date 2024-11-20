@@ -29,10 +29,15 @@ fn view(app: &App, model: &Model, frame: Frame) {
     
     let center = pt2(0.0, 0.0);
     
-    // Draw first circle
+    // Calculate second circle radius based on original circle's diameter divided into 11 parts
+    // and taking 7 parts of that
+    let part_size = (model.circle_radius * 2.0) / 11.0;  // divide diameter by 11
+    let second_radius = part_size * 7.0;  // take 7 parts
+    
+    // Draw first circle (smaller)
     draw.ellipse()
         .xy(center)
-        .radius(model.circle_radius)
+        .radius(second_radius)
         .no_fill()
         .stroke(BLACK)
         .stroke_weight(2.0);
@@ -49,19 +54,43 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .stroke(BLACK)
         .stroke_weight(2.0);
     
-    // Calculate second circle radius based on original circle's diameter divided into 11 parts
-    // and taking 7 parts of that
-    let part_size = (model.circle_radius * 2.0) / 11.0;  // divide diameter by 11
-    let second_radius = part_size * 7.0;  // take 7 parts
-    
-    // Draw second circle
+    // Draw horizontal diameter D across smaller circle
+    let diameter_start = pt2(-model.circle_radius, 0.0);
+    let diameter_end = pt2(model.circle_radius, 0.0);
+    draw.line()
+        .start(diameter_start)
+        .end(diameter_end)
+        .color(BLACK)
+        .stroke_weight(2.0);
+
+    // Draw second circle (largest)
     draw.ellipse()
         .xy(center)
-        .radius(second_radius)
+        .radius(model.circle_radius)
         .no_fill()
         .stroke(BLACK)
         .stroke_weight(2.0);
     
+    // Draw point T at top of largest circle
+    let point_t = pt2(0.0, model.circle_radius);
+    draw.ellipse()
+        .xy(point_t)
+        .radius(3.0)
+        .color(BLACK);
+
+    // Draw lines from T to ends of diameter D
+    draw.line()
+        .start(point_t)
+        .end(diameter_start)
+        .color(BLACK)
+        .stroke_weight(2.0);
+    
+    draw.line()
+        .start(point_t)
+        .end(diameter_end)
+        .color(BLACK)
+        .stroke_weight(2.0);
+
     // Draw center point
     draw.ellipse()
         .xy(center)
