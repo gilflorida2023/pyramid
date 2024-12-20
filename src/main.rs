@@ -148,14 +148,14 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .xy(model.phi_point)
         .radius(model.smallcircle_radius)
         .no_fill()
-        .stroke(ORANGE)
+        .stroke(GREEN)
         .stroke_weight(model.thickness);
     
     draw.rect()
         .xy(model.phi_point)
         .w_h((model.smallcircle_radius)*2.0,(model.smallcircle_radius)*2.0)
         .no_fill()
-        .stroke(ORANGE)
+        .stroke(GREEN)
         .stroke_weight(model.thickness);
 
     draw.to_frame(app, &frame).unwrap();
